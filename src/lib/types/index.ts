@@ -164,7 +164,7 @@ export interface Analytics {
   userId?: string;
   clubId?: string;
   action: 'view' | 'like' | 'share' | 'complete' | 'enroll';
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
   timestamp: Date;
 }
 

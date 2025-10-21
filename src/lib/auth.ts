@@ -1,8 +1,17 @@
 // src/lib/auth.ts
-import { NextAuthOptions } from "next-auth";
+import { NextAuthOptions, Session, User } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
+
+// Extended types for our custom properties
+interface ExtendedUser extends User {
+  role: string;
+}
+
+interface ExtendedSession extends Session {
+  user: ExtendedUser;
+}
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -40,17 +49,18 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async jwt({ token, user }) {
-      if (user) {
-        token.role = (user as any).role || "member";
+      if (user && 'role' in user) {
+        token.role = user.role;
       }
       return token;
     },
-    async session({ session, token }) {
+    async session({ session, token }): Promise<ExtendedSession> {
       if (token && session.user) {
+        // Extend the session user object with our custom properties
         session.user.id = token.sub || "demo-user-id";
-        session.user.role = (token.role as string) || "member";
+        session.user.role = token.role || "member";
       }
-      return session;
+      return session as ExtendedSession;
     },
   },
   pages: {

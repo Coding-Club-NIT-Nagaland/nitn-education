@@ -41,8 +41,8 @@ export default function NotFound() {
               Oops! Page Not Found
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-8">
-              The page you're looking for seems to have taken a different learning path.
-              Don't worry, even the best explorers sometimes lose their way!
+              The page you&apos;re looking for seems to have taken a different learning path.
+              Don&apos;t worry, even the best explorers sometimes lose their way!
             </p>
 
             {/* Fun Suggestion */}
@@ -136,7 +136,7 @@ export default function NotFound() {
           {/* Search Suggestion */}
           <div className="max-w-md mx-auto">
             <p className="text-muted-foreground mb-4 text-sm">
-              Or search for what you're looking for:
+              Or search for what you&apos;re looking for:
             </p>
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
